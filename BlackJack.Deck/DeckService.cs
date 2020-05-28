@@ -3,8 +3,8 @@ using BlackJack.Domain.Interfaces;
 using BlackJack.Domain.PlayingCard;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace BlackJack.StandardDeck
 {
@@ -14,7 +14,7 @@ namespace BlackJack.StandardDeck
     ///<seealso cref = "Domain.Interfaces.IDeck">
     /// Method documentation at the interface.
     ///</seealso>
-    public class Deck : IDeck
+    public class DeckService : IDeckService
     {
         /// <summary>
         /// Provides the Random used in the Shuffle method.
@@ -28,7 +28,7 @@ namespace BlackJack.StandardDeck
 
         public List<Card> Cards { get; set; }
 
-        public Deck()
+        public DeckService()
         {
             Setup();
         }
@@ -86,6 +86,18 @@ namespace BlackJack.StandardDeck
 
             //Return selected card
             return drawnCard;
+        }
+        public List<Card> Draw(int count)
+        {
+            //Init
+            List<Card> drawnCardList = new List<Card>();
+
+            for (int i = 0; i <= count; i++)
+            {
+                drawnCardList.Add(Draw());
+            }
+
+            return drawnCardList;
         }
 
         public int CardCount()

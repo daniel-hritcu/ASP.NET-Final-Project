@@ -41,9 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BlackJackGameService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BlackJack.Deck\BlackJack.StandardDeck.csproj">
+      <Project>{8091b9da-7819-4183-9740-2e21b73494df}</Project>
+      <Name>BlackJack.StandardDeck</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BlackJack.Domain\BlackJack.Domain.csproj">
       <Project>{8BA9FC2D-62BF-4F56-922D-3059BEBB27B3}</Project>
       <Name>BlackJack.Domain</Name>

@@ -8,8 +8,15 @@ namespace BlackJack.Domain.GameLogic
 {
     public class GameState
     {
-        Player DefaultPlayer { get; set; }
-        Player Dealer { get; set; }
-        State CurrentState { get; set; }
+        public Player DefaultPlayer { get; set; }
+        public Player Dealer { get; set; }
+        public State CurrentState { get; set; }
+
+        public GameState(Player defaultPlayer, Player dealer)
+        {
+            DefaultPlayer = defaultPlayer;
+            Dealer = dealer;
+            CurrentState = State.Open;
+        }
     }
 }

@@ -9,9 +9,6 @@ namespace BlackJack.Domain.Interfaces
 {
     public interface IBlackJackGameService
     {
-        Player DefaultPlayer { get; set; }
-        Player Dealer { get; set; }
-        IDeckService DeckService { get; set; }
         GameState GameState { get; set; }
 
         /// <summary>
@@ -32,7 +29,7 @@ namespace BlackJack.Domain.Interfaces
         /// <summary>
         /// Calculates the best player score while trying not to bust.
         /// </summary>
-        void GetScore();
+        void CalculateScore(Player player);
 
         /// <summary>
         /// Dealer logic

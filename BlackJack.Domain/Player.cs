@@ -19,5 +19,17 @@ namespace BlackJack.Domain
         /// The betting balance of the player
         /// </summary>
         public int Balance { get; set; }
+
+        /// <summary>
+        /// The calculated value of the hand
+        /// </summary>
+        public int Score { get; set; }
+
+        public Player()
+        {
+            Hand = new List<Card>();
+            Balance = 0;
+            Score = 0;
+        }
     }
 }
