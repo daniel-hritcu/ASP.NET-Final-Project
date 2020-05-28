@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BlackJack.Domain.Interfaces
 {
-    public interface IDeck
+    public interface IDeckService
     {
         List<Card> Cards { get; set; }
 

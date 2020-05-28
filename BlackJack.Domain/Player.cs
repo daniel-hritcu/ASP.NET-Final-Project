@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BlackJack.Domain
 {
-    class Player
+    public class Player
     {
         /// <summary>
         /// The hand of cards of the player.
@@ -19,10 +19,5 @@ namespace BlackJack.Domain
         /// The betting balance of the player
         /// </summary>
         public int Balance { get; set; }
-
-        /// <summary>
-        /// The player stand state.
-        /// </summary>
-        public bool Stand { get; set; }
     }
 }
