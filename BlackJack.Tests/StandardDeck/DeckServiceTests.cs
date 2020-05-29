@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BlackJack.Domain.PlayingCard;
 using BlackJack.StandardDeck;
 using BlackJack.StandardDeck.Exceptions;
@@ -12,28 +8,28 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace BlackJack.UnitTests.StandardDeck
 {
     [TestClass]
-    public class DeckTests
+    public class DeckServiceTests
     {
-        Deck deck;
+        DeckService _deckService;
         
         [TestMethod]
-        public void Deck_Constructor_Has52Cards()
+        public void DeckService_Constructor_Has52Cards()
         {
-            deck = new Deck();
+            _deckService = new DeckService();
 
             int expectedCardCount = 52;
-            int actualCardCount = deck.Cards.Count;
+            int actualCardCount = _deckService.Cards.Count;
 
             Assert.AreEqual(expectedCardCount, actualCardCount);
         }
 
         [TestMethod]
-        public void Deck_Constructor_HasNoDuplicateCards()
+        public void DeckService_Constructor_HasNoDuplicateCards()
         {
-            deck = new Deck();
+            _deckService = new DeckService();
 
             //Count duplicate cards in deck. Return false if none.
-            bool hasDuplicateCards = deck.Cards
+            bool hasDuplicateCards = _deckService.Cards
                 .GroupBy(x => new { x.Rank, x.Suit })
                 .Where(x => x.Skip(1).Any()).Any();
 
@@ -43,9 +39,9 @@ namespace BlackJack.UnitTests.StandardDeck
         [TestMethod]
         public void Draw_FromNonEmptyDeck_Get1Card()
         {
-            deck = new Deck();
+            _deckService = new DeckService();
 
-            Card expectedCard = deck.Draw();
+            Card expectedCard = _deckService.Draw();
 
             Assert.IsNotNull(expectedCard);
         }
@@ -54,27 +50,27 @@ namespace BlackJack.UnitTests.StandardDeck
         [ExpectedException(typeof(EmptyDeckException), "Deck does not have any cards.")]
         public void Draw_FromEmptyDeck_ThowsEmptyDeckException()
         {
-            deck = new Deck();
+            _deckService = new DeckService();
 
             //Clear cards from deck
-            deck.Cards = new List<Card>();
+            _deckService.Cards = new List<Card>();
             //Draw card from empty deck;
-            deck.Draw();
+            _deckService.Draw();
         }
 
         [TestMethod]
         public void Shuffle_NewDeck_GetShuffledDeck()
         {
-            deck = new Deck();
+            _deckService = new DeckService();
             List<Card> firstDeckCards = new List<Card>();
             List<Card> secondDeckCards = new List<Card>();
 
             //Save first deck cards
-            firstDeckCards.AddRange(deck.Cards);
+            firstDeckCards.AddRange(_deckService.Cards);
             //Shuffle deck
-            deck.Shuffle();
+            _deckService.Shuffle();
             //Save new deck cards
-            secondDeckCards.AddRange(deck.Cards);
+            secondDeckCards.AddRange(_deckService.Cards);
 
             //first deck should not be equal to new deck
             Assert.AreNotEqual(firstDeckCards, secondDeckCards);
