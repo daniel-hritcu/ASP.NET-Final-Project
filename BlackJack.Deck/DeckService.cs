@@ -11,7 +11,7 @@ namespace BlackJack.StandardDeck
     /// <summary>
     /// Implements the functionality of a standard deck of playing cards
     /// </summary>
-    ///<seealso cref = "Domain.Interfaces.IDeck">
+    ///<seealso cref = "Domain.Interfaces.IDeckService">
     /// Method documentation at the interface.
     ///</seealso>
     public class DeckService : IDeckService
@@ -33,7 +33,7 @@ namespace BlackJack.StandardDeck
             Setup();
         }
 
-        
+
         public void Setup()
         {
             //Populate deck with cards
@@ -42,8 +42,8 @@ namespace BlackJack.StandardDeck
                 .SelectMany(suit => Enumerable.Range(2, 13)
                 .Select(rank => new Card
                 {
-                    Suit = (CardSuit) suit,
-                    Rank = (CardRank) rank
+                    Suit = (CardSuit)suit,
+                    Rank = (CardRank)rank
                 })));
 
             //Shuffle the new deck
@@ -52,10 +52,11 @@ namespace BlackJack.StandardDeck
 
         public void Shuffle()
         {
-            int cardsCount = CardCount();
+            int cardsCount = Cards.Count;
 
             //Shuffle the ammount of times defined in _shuffleTimes.
-            for (int i = 0; i < _shuffleTimes; i++) {
+            for (int i = 0; i < _shuffleTimes; i++)
+            {
 
                 while (cardsCount > 1)
                 {
@@ -70,13 +71,13 @@ namespace BlackJack.StandardDeck
             }
         }
 
-       
+
         public Card Draw()
         {
-            if (CardCount() == 0)
+            if (Cards.Count == 0)
             {
                 throw new EmptyDeckException("Deck does not have any cards.");
-            } 
+            }
 
             //Select card
             Card drawnCard = Cards[0];
@@ -92,17 +93,12 @@ namespace BlackJack.StandardDeck
             //Init
             List<Card> drawnCardList = new List<Card>();
 
-            for (int i = 0; i <= count; i++)
+            for (int i = 0; i < count; i++)
             {
                 drawnCardList.Add(Draw());
             }
 
             return drawnCardList;
-        }
-
-        public int CardCount()
-        {
-            return Cards.Count;
         }
     }
 }

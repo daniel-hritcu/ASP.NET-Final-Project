@@ -13,6 +13,7 @@ namespace BlackJack.Domain.GameLogic
         BlackJack,
         Win,
         Push,
-        Loss
+        Loss,
+        LowBalance
     }
 }

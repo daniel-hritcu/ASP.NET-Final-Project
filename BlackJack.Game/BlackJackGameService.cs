@@ -3,6 +3,7 @@ using BlackJack.Domain.GameLogic;
 using BlackJack.Domain.Interfaces;
 using BlackJack.Domain.PlayingCard;
 using BlackJack.StandardDeck;
+using BlackJack.StandardDeck.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +21,10 @@ namespace BlackJack.Game
         private Player _defaultPlayer;
         private Player _dealer;
         private DeckService _deckService;
+        private double PlayerBet;
 
         //Player starts with 500$ by default.
-        private readonly int DEFAULT_BALANCE = 500;
+        private readonly double DEFAULT_BALANCE = 500;
 
         public BlackJackGameService()
         {
@@ -32,13 +34,29 @@ namespace BlackJack.Game
             _dealer = new Player();
             //Init Deck
             _deckService = new DeckService();
+            //Init GameState
+            GameState = new GameState();
         }
 
-        public void Deal(int bet)
+        public void Deal(double bet)
         {
-            //Clear player hands
-            _defaultPlayer.Hand = new List<Card>();
-            _dealer.Hand = new List<Card>();
+            if (_defaultPlayer.Balance - bet < 0) 
+            {
+                GameState.CurrentState = State.LowBalance;
+                return;
+            }
+            //Refresh deck
+            _deckService.Setup();
+
+            //Store bet
+            PlayerBet = bet;
+            //Player balance with bet substracted
+            double playerBalance = _defaultPlayer.Balance - PlayerBet;
+
+            //Reset players
+            _defaultPlayer = new Player(playerBalance);
+            _dealer = new Player();
+
             //At the beginning of each hand, 
             //the dealer deals two cards to the player and two cards to himself.
             _defaultPlayer.Hand.AddRange(_deckService.Draw(2));
@@ -48,37 +66,77 @@ namespace BlackJack.Game
             GameState = new GameState(_defaultPlayer, _dealer);
         }
 
+        public void Hit()
+        {
+            if (GameState.CurrentState == State.Open)
+            {
+                _defaultPlayer.Hand.Add(_deckService.Draw());
+                CalculateScore(_defaultPlayer);
+
+                if (IsBust(_defaultPlayer.Score))
+                {
+                    GameState.CurrentState = State.Bust;
+                    EndGame();
+                }
+                else if (IsBlackJack(_defaultPlayer.Score))
+                {
+                    GameState.CurrentState = State.BlackJack;
+                    EndGame();
+                }
+            }
+        }
+
+        public void Stand()
+        {
+            if (GameState.CurrentState == State.Open)
+            {
+                EndGame();
+            }
+        }
+
         public void EndGame()
         {
             //If the dealer has a total of less than 17 points, he must hit.
             while (_dealer.Score < 17)
             {
                 _dealer.Hand.Add(_deckService.Draw());
+                CalculateScore(_dealer);
             }
 
             //If dealer busted, but player did not.
             //Or if player score is bigger than dealer.
             //Player wins.
-            if ((IsBust(_dealer.Score) && !IsBust(_defaultPlayer.Score))||
+            if ((IsBust(_dealer.Score) && !IsBust(_defaultPlayer.Score)) ||
                 (_defaultPlayer.Score > _dealer.Score))
             {
                 GameState.CurrentState = State.Win;
+                CalculateWin();
             }
 
             //In case of a tie, the player's bet is returned
             else if (_defaultPlayer.Score == _dealer.Score)
             {
                 GameState.CurrentState = State.Push;
+                CalculateWin();
             }
             //Player has lost
-            else 
+            else
             {
                 GameState.CurrentState = State.Loss;
             }
-
         }
 
-        public void CalculateScore(Player player)
+        public void Reset()
+        {
+            //Reset player balance
+            _defaultPlayer = new Player() { Balance = DEFAULT_BALANCE };
+        }
+
+
+        /// <summary>
+        /// Calculates the best player score while trying not to bust.
+        /// </summary>
+        private void CalculateScore(Player player)
         {
             int score = 0;
 
@@ -104,24 +162,20 @@ namespace BlackJack.Game
             player.Score = score;
         }
 
-        public void Hit()
+        private void CalculateWin() 
         {
-            _defaultPlayer.Hand.Add(_deckService.Draw());
-            CalculateScore(_defaultPlayer);
-
-            if (IsBust(_defaultPlayer.Score))
+            if (GameState.CurrentState == State.Win)
             {
-                GameState.CurrentState = State.Bust;
+                GameState.DefaultPlayer.Balance += PlayerBet * 2;
             }
-            else if (IsBlackJack(_defaultPlayer.Score))
+            else if (GameState.CurrentState == State.BlackJack)
             {
-                GameState.CurrentState = State.BlackJack;
+                GameState.DefaultPlayer.Balance += PlayerBet * 2.5;
             }
-        }
-
-        public void Stand()
-        {
-            EndGame();
+            else if (GameState.CurrentState == State.Push)
+            {
+                GameState.DefaultPlayer.Balance += PlayerBet;
+            }
         }
 
         private bool IsBlackJack(int score)

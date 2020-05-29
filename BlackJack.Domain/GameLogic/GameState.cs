@@ -18,5 +18,9 @@ namespace BlackJack.Domain.GameLogic
             Dealer = dealer;
             CurrentState = State.Open;
         }
+
+        public GameState()
+        {
+        }
     }
 }

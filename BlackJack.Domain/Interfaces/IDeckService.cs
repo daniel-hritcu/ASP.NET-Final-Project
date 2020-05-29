@@ -28,15 +28,5 @@ namespace BlackJack.Domain.Interfaces
         /// Returns the 'drawn card'.
         /// </returns>
         Card Draw();
-
-        /// <summary>
-        /// Counts the number of cards in the deck.
-        /// </summary>
-        /// <returns>
-        /// Returns the deck card count.
-        /// </returns>
-        int CardCount();
-
-
     }
 }

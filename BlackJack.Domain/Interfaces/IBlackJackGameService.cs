@@ -14,7 +14,7 @@ namespace BlackJack.Domain.Interfaces
         /// <summary>
         /// Lock in bet and deal first cards
         /// </summary>
-        void Deal(int bet);
+        void Deal(double bet);
 
         /// <summary>
         /// Give player 1 card
@@ -27,11 +27,6 @@ namespace BlackJack.Domain.Interfaces
         void Stand();
 
         /// <summary>
-        /// Calculates the best player score while trying not to bust.
-        /// </summary>
-        void CalculateScore(Player player);
-
-        /// <summary>
         /// Dealer logic
         /// </summary>
         /// <par>
@@ -42,6 +37,11 @@ namespace BlackJack.Domain.Interfaces
         /// 3. If the dealer has a total of less than 17 points, he must hit. jg
         /// </par>
         void EndGame();
+
+        /// <summary>
+        /// Resets player balance.
+        /// </summary>
+        void Reset();
 
 
     }
