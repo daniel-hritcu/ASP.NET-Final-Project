@@ -10,5 +10,10 @@ namespace BlackJack.Domain.PlayingCard
     {
         public CardRank Rank { get; set; }
         public CardSuit Suit { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Rank} {Suit}";
+        }
     }
 }
