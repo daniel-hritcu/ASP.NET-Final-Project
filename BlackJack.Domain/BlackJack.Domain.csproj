@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameLogic\GameAction.cs" />
     <Compile Include="GameLogic\GameState.cs" />
     <Compile Include="GameLogic\State.cs" />
     <Compile Include="Interfaces\IBlackJackGameService.cs" />

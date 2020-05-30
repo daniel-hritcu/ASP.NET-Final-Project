@@ -57,11 +57,15 @@ namespace BlackJack.Game
             _defaultPlayer = new Player(playerBalance);
             _dealer = new Player();
 
+            
+
             //At the beginning of each hand, 
             //the dealer deals two cards to the player and two cards to himself.
             _defaultPlayer.Hand.AddRange(_deckService.Draw(2));
-            _dealer.Hand.AddRange(_deckService.Draw(2));
+            CalculateScore(_defaultPlayer);
 
+            _dealer.Hand.AddRange(_deckService.Draw(2));
+            CalculateScore(_dealer);
             //Update GameState
             GameState = new GameState(_defaultPlayer, _dealer);
         }

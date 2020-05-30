@@ -13,7 +13,7 @@ namespace BlackJack.Domain.PlayingCard
 
         public override string ToString()
         {
-            return $"{Rank} {Suit}";
+            return $"{Rank}Of{Suit}";
         }
     }
 }

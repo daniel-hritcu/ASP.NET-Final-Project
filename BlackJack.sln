@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackJack.Domain", "BlackJa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackJack.UnitTests", "BlackJack.Tests\BlackJack.UnitTests.csproj", "{2E026524-A13F-46AB-9292-AE56D040E419}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackJack.Web", "BlackJack.Web\BlackJack.Web.csproj", "{05496259-0122-4C31-901F-E7CBF6F4A31D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackJack.MVC", "BlackJack.MVC\BlackJack.MVC.csproj", "{DA1527E0-32C2-4C00-AD13-E83DE3A4A664}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{2E026524-A13F-46AB-9292-AE56D040E419}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E026524-A13F-46AB-9292-AE56D040E419}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E026524-A13F-46AB-9292-AE56D040E419}.Release|Any CPU.Build.0 = Release|Any CPU
-		{05496259-0122-4C31-901F-E7CBF6F4A31D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{05496259-0122-4C31-901F-E7CBF6F4A31D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{05496259-0122-4C31-901F-E7CBF6F4A31D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{05496259-0122-4C31-901F-E7CBF6F4A31D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA1527E0-32C2-4C00-AD13-E83DE3A4A664}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA1527E0-32C2-4C00-AD13-E83DE3A4A664}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA1527E0-32C2-4C00-AD13-E83DE3A4A664}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA1527E0-32C2-4C00-AD13-E83DE3A4A664}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
