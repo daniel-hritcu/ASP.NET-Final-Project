@@ -1,4 +1,5 @@
 ﻿using BlackJack.Domain.GameLogic;
+using BlackJack.Domain.PlayingCard;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,40 +10,20 @@ namespace BlackJack.Domain.Interfaces
 {
     public interface IBlackJackGameService
     {
-        GameState GameState { get; set; }
-
         /// <summary>
         /// Lock in bet and deal first cards
         /// </summary>
-        void Deal(double bet);
+        GameState Deal(double bet);
 
         /// <summary>
         /// Give player 1 card
         /// </summary>
-        void Hit();
+        GameState Hit();
 
         /// <summary>
-        /// Player will not recive any more cards. EndGame will be executed.
+        /// Player will not recive any more cards. 
+        /// EndGame will be executed.
         /// </summary>
-        void Stand();
-
-        /// <summary>
-        /// Dealer logic
-        /// </summary>
-        /// <par>
-        /// The dealer must then hit or stand according to these rules:
-        /// 
-        /// 1. The dealer must count an ace as 11 points, unless this causes the dealer to bust. Then the dealer must count the ace as 1 point. 
-        /// 2. If the dealer has a total of 17 points or more, he must stand. 
-        /// 3. If the dealer has a total of less than 17 points, he must hit. jg
-        /// </par>
-        void EndGame();
-
-        /// <summary>
-        /// Resets player balance.
-        /// </summary>
-        void Reset();
-
-
+        GameState Stand();
     }
 }

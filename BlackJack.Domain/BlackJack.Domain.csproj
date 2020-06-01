@@ -41,15 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GameLogic\GameAction.cs" />
-    <Compile Include="GameLogic\GameState.cs" />
-    <Compile Include="GameLogic\State.cs" />
+    <Compile Include="Models\GameLogic\GameAction.cs" />
+    <Compile Include="Models\GameLogic\GameState.cs" />
+    <Compile Include="Models\GameLogic\State.cs" />
     <Compile Include="Interfaces\IBlackJackGameService.cs" />
     <Compile Include="Interfaces\IDeckService.cs" />
-    <Compile Include="Player.cs" />
-    <Compile Include="PlayingCard\Card.cs" />
-    <Compile Include="PlayingCard\CardRank.cs" />
-    <Compile Include="PlayingCard\CardSuit.cs" />
+    <Compile Include="Models\Player.cs" />
+    <Compile Include="Models\PlayingCard\Card.cs" />
+    <Compile Include="Models\PlayingCard\CardRank.cs" />
+    <Compile Include="Models\PlayingCard\CardSuit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

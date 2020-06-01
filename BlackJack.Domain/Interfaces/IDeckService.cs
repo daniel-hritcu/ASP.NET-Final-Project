@@ -9,7 +9,6 @@ namespace BlackJack.Domain.Interfaces
 {
     public interface IDeckService
     {
-        List<Card> Cards { get; set; }
 
         /// <summary>
         /// Sets up the Deck as a standard playing cards deck.
@@ -28,5 +27,16 @@ namespace BlackJack.Domain.Interfaces
         /// Returns the 'drawn card'.
         /// </returns>
         Card Draw();
+
+        /// <summary>
+        /// Draws a number of cards.
+        /// </summary>
+        /// <param name="count">
+        /// The number of cards to be drawn.
+        /// </param>
+        /// <returns>
+        /// List of cards drawn.
+        /// </returns>
+        List<Card> Draw(int count);
     }
 }
