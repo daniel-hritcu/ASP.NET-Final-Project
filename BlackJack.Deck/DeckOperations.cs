@@ -1,20 +1,19 @@
-﻿using BlackJack.StandardDeck.Exceptions;
-using BlackJack.Domain.Interfaces;
+﻿using BlackJack.StandardDeck.Interfaces;
 using BlackJack.Domain.PlayingCard;
+using BlackJack.StandardDeck.Exceptions;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
 
 namespace BlackJack.StandardDeck
 {
     /// <summary>
-    /// Implements the functionality of a standard deck of playing cards
+    /// Provides the basic operations of a standard deck of playing cards
     /// </summary>
-    ///<seealso cref = "Domain.Interfaces.IDeckService">
-    /// Method documentation at the interface.
+    ///<seealso cref = "Interfaces.IDeckOperations">
+    /// Method description at the interface.
     ///</seealso>
-    public class DeckService : IDeckService
+    ///
+    public class DeckOperations : IDeckOperations
     {
         /// <summary>
         /// Provides the Random used in the Shuffle method.
@@ -24,80 +23,67 @@ namespace BlackJack.StandardDeck
         /// <summary>
         /// Sets the number of times the deck is shuffled.
         /// </summary>
-        private const int _shuffleTimes = 100;
+        private const int shuffleTimes = 100;
 
-        public List<Card> Cards { get; set; }
+        /// <summary>
+        /// The list of cards in the deck.
+        /// </summary>
+        private List<Card> _deck { get; set; }
 
-        public DeckService()
+        public DeckOperations(List<Card> deck)
         {
-            Setup();
-        }
-
-
-        public void Setup()
-        {
-            //Populate deck with cards
-            Cards = new List<Card>(
-                Enumerable.Range(1, 4)
-                .SelectMany(suit => Enumerable.Range(2, 13)
-                .Select(rank => new Card
-                {
-                    Suit = (CardSuit)suit,
-                    Rank = (CardRank)rank
-                })));
-
-            //Shuffle the new deck
-            Shuffle();
+            _deck = deck;
         }
 
         public void Shuffle()
         {
-            int cardsCount = Cards.Count;
+            int cardsCount = _deck.Count;
 
             //Shuffle the ammount of times defined in _shuffleTimes.
-            for (int i = 0; i < _shuffleTimes; i++)
+            for (int i = 0; i < shuffleTimes; i++)
             {
-
                 while (cardsCount > 1)
                 {
                     cardsCount--;
 
                     int index = Random.Next(cardsCount + 1);
-                    Card card = Cards[index];
-                    Cards[index] = Cards[cardsCount];
-                    Cards[cardsCount] = card;
+                    Card card = _deck[index];
+                    _deck[index] = _deck[cardsCount];
+                    _deck[cardsCount] = card;
                 }
 
             }
         }
 
-
         public Card Draw()
         {
-            if (Cards.Count == 0)
+            if (_deck.Count == 0)
             {
                 throw new EmptyDeckException("Deck does not have any cards.");
             }
 
             //Select card
-            Card drawnCard = Cards[0];
+            Card drawnCard = _deck[0];
 
             //Remove from deck
-            Cards.RemoveAt(0);
+            _deck.RemoveAt(0);
 
             //Return selected card
             return drawnCard;
         }
+
         public List<Card> Draw(int count)
         {
             //Init
             List<Card> drawnCardList = new List<Card>();
 
+            //Draw the number of cards in count
             for (int i = 0; i < count; i++)
             {
                 drawnCardList.Add(Draw());
             }
 
+            //Return the list of drawn cards
             return drawnCardList;
         }
     }
