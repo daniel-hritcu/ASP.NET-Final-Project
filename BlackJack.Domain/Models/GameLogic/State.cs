@@ -8,6 +8,7 @@ namespace BlackJack.Domain.GameLogic
 {
     public enum State
     {
+        NewGame,
         Open,
         Bust,
         BlackJack,

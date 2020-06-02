@@ -21,24 +21,24 @@ namespace BlackJack.StandardDeck.Services
             _deck = new Deck();
         }
 
-        public void Setup()
+        public void NewDeck()
         {
-            _deck.Setup();
+            _deck.NewDeck();
         }
 
         public void Shuffle()
         {
-            _deck.DeckOperations.Shuffle();
+            _deck.Shuffle();
         }
 
         public Card Draw()
         {
-            return _deck.DeckOperations.Draw();
+            return _deck.Draw();
         }
 
         public List<Card> Draw(int count)
         {
-            return _deck.DeckOperations.Draw(count);
+            return _deck.Draw(count);
         }
     }
 }

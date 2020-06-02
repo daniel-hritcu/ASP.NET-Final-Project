@@ -8,6 +8,7 @@ namespace BlackJack.Domain.PlayingCard
 {
     public enum CardRank
     {
+        Back = 0,
         Two = 2,
         Three = 3,
         Four = 4,

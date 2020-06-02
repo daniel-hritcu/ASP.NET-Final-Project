@@ -42,16 +42,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Deck.cs" />
-    <Compile Include="DeckOperations.cs" />
     <Compile Include="Exceptions\EmptyDeckException.cs" />
-    <Compile Include="Interfaces\IDeck.cs" />
-    <Compile Include="Interfaces\IDeckOperations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DeckService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BlackJack.Domain\BlackJack.Domain.csproj">
-      <Project>{8BA9FC2D-62BF-4F56-922D-3059BEBB27B3}</Project>
+      <Project>{8ba9fc2d-62bf-4f56-922d-3059bebb27b3}</Project>
       <Name>BlackJack.Domain</Name>
     </ProjectReference>
   </ItemGroup>

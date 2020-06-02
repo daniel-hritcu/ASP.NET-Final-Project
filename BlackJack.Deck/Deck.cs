@@ -1,32 +1,36 @@
-﻿using BlackJack.Domain.PlayingCard;
-using BlackJack.StandardDeck.Interfaces;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
+using System.Collections.Generic;
+using BlackJack.Domain.PlayingCard;
+using BlackJack.Domain.Interfaces;
+using BlackJack.StandardDeck.Exceptions;
 
 namespace BlackJack.StandardDeck
 {
-    public class Deck : IStandardDeck
+    public class Deck
     {
+        /// <summary>
+        /// Provides the Random used in the Shuffle method.
+        /// </summary>
+        private static readonly Random Random = new Random();
+
+        /// <summary>
+        /// Sets the number of times the deck is shuffled.
+        /// </summary>
+        private const int shuffleTimes = 100;
+
         /// <summary>
         /// The list of cards in the deck.
         /// </summary>
-        public List<Card> Cards { get; set; }
+        private List<Card> Cards { get; set; }
 
-        /// <summary>
-        /// Provides access to deck operations
-        /// </summary>
-        public DeckOperations DeckOperations;
-
-        public Deck()
+        internal Deck()
         {
             //Generate new deck
-            Setup();
-
-            //Init DeckOperations
-            DeckOperations = new DeckOperations(Cards);
+            NewDeck();
         }
 
-        public void Setup()
+        internal void NewDeck()
         {
             //Populate deck with cards
             Cards = new List<Card>(
@@ -39,7 +43,59 @@ namespace BlackJack.StandardDeck
                 })));
 
             //Shuffle the new deck
-            DeckOperations.Shuffle();
+            Shuffle();
+        }
+
+        internal void Shuffle()
+        {
+            int cardsCount = Cards.Count;
+
+            //Shuffle the ammount of times defined in _shuffleTimes.
+            for (int i = 0; i < shuffleTimes; i++)
+            {
+                while (cardsCount > 1)
+                {
+                    cardsCount--;
+
+                    int index = Random.Next(cardsCount + 1);
+                    Card card = Cards[index];
+                    Cards[index] = Cards[cardsCount];
+                    Cards[cardsCount] = card;
+                }
+
+            }
+        }
+
+        internal Card Draw()
+        {
+            if (Cards.Count == 0)
+            {
+                throw new EmptyDeckException("Deck does not have any cards.");
+            }
+
+            //Select card
+            Card drawnCard = Cards[0];
+
+            //Remove from deck
+            Cards.RemoveAt(0);
+
+            //Return selected card
+            return drawnCard;
+        }
+
+        internal List<Card> Draw(int count)
+        {
+            //Init
+            List<Card> drawnCardList = new List<Card>();
+
+            //Draw the number of cards in count
+            for (int i = 0; i < count; i++)
+            {
+                drawnCardList.Add(Draw());
+            }
+
+            //Return the list of drawn cards
+            return drawnCardList;
         }
     }
 }

@@ -12,12 +12,13 @@ namespace BlackJack.Domain.GameLogic
         public Player Dealer { get; set; }
         public State CurrentState { get; set; }
         public double Bet { get; set; }
+        public double Winnings { get; set; }
 
-        public GameState(Player defaultPlayer, Player dealer)
+        public GameState(Player defaultPlayer, Player dealer, State currentState = State.NewGame)
         {
             DefaultPlayer = defaultPlayer;
             Dealer = dealer;
-            CurrentState = State.Open;
+            CurrentState = currentState;
         }
 
         public GameState()

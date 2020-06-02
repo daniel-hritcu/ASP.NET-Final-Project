@@ -9,33 +9,32 @@ namespace BlackJack.Domain.Interfaces
 {
     public interface IDeckService
     {
-
         /// <summary>
-        /// Sets up the Deck as a standard playing cards deck.
+        /// Generates a new deck and shuffles it.
         /// </summary>
-        void Setup();
+        void NewDeck();
 
         /// <summary>
-        /// Provides the 'shuffle' functionality for our deck of cards.
+        /// Shuffles the cards in the deck.
         /// </summary>
         void Shuffle();
 
         /// <summary>
-        /// Provides the 'draw' functionality for our deck of cards.
+        /// Draws a card from the deck
         /// </summary>
         /// <returns>
-        /// Returns the 'drawn card'.
+        /// One Card
         /// </returns>
         Card Draw();
 
         /// <summary>
-        /// Draws a number of cards.
+        /// Draws multiple cards from the deck
         /// </summary>
         /// <param name="count">
-        /// The number of cards to be drawn.
+        /// The number of cards to be drawn
         /// </param>
         /// <returns>
-        /// List of cards drawn.
+        /// A list of cards drawn.
         /// </returns>
         List<Card> Draw(int count);
     }

@@ -41,7 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BlackJackGameService.cs" />
+    <Compile Include="Game\GameCardValues.cs" />
+    <Compile Include="Game\HandLogic.cs" />
+    <Compile Include="Game\Rules.cs" />
+    <Compile Include="Services\BlackJackGameService.cs" />
+    <Compile Include="Exceptions\GameStateException.cs" />
+    <Compile Include="Exceptions\CardRankException.cs" />
+    <Compile Include="Game\GameLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -54,5 +60,6 @@
       <Name>BlackJack.Domain</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
