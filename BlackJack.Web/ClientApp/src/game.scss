@@ -1,0 +1,466 @@
+﻿// Fonts
+$body-font: "RobotoDraft", "Roboto";
+
+// Font Weights
+$thin: 100;
+$light: 300;
+$regular: 400;
+$semibold: 600;
+$bold: 700;
+$ultra: 800;
+
+// Main Colors
+$white: #ffffff;
+$black: #000000;
+$dark-gray: lighten($black, 20%);
+$gray: lighten($black, 40%);
+$light-gray: lighten($black, 60%);
+$lighter-gray: lighten($black, 80%);
+
+// Card Settings
+$card-width: 240px;
+$card-height: 320px;
+
+// Card Colors
+$primary: #363636;
+$accent: #d64c4c;
+
+// Base Font
+$base-font-color: $gray;
+$base-font-family: $body-font, sans-serif;
+$base-font-size: 14px;
+$base-font-weight: $regular;
+$base-line-height: 1;
+
+// Material Shadow Mixin
+@mixin materialShadow($level) {
+    @if $level == 1 {
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    }
+
+    @else if $level == 2 {
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    }
+
+    @else if $level == 3 {
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    }
+
+    @else if $level == 4 {
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    }
+
+    @else if $level == 5 {
+        box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+    }
+}
+
+/* Body */
+body {
+    background: #ebeff2;
+    color: $base-font-color;
+    font-family: $base-font-family;
+    font-size: $base-font-size;
+    font-weight: $base-font-weight;
+    line-height: $base-line-height;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Card */
+.card {
+    margin: 10px;
+    z-index: 1;
+    position: float;
+    float: left;
+    background: $white;
+    width: $card-width;
+    height: $card-height;
+    border-radius: 20px;
+    @include materialShadow(1);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    overflow-x: hidden;
+    overflow-y: hidden;
+
+    .panel {
+        position: absolute;
+        width: 100%;
+        background: $primary;
+        padding: 30px;
+        box-sizing: border-box;
+        color: $white;
+        z-index: 0;
+
+        &:last-child {
+            bottom: 0;
+        }
+
+        .rank {
+            display: inline-block;
+            font-size: 38px;
+            padding: 0 0 24px 0;
+            margin: -15px 0 0 -15px;
+            font-weight: 100;
+        }
+
+        .suit {
+            display: inline-block;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            float: right;
+        }
+
+        .icon {
+            background: $white;
+            width: 25%;
+            height: 25%;
+            margin: -26px 0 -84px 10px;
+            padding: 10px;
+            border-radius: 100%;
+            line-height: 47px;
+            text-align: center;
+            box-sizing: border-box;
+            @include materialShadow(2);
+
+            svg {
+                display: block;
+                height: 100%;
+                margin: 0 auto;
+            }
+        }
+
+        &.bottom {
+            transform: rotate(180deg);
+        }
+
+        &.back {
+            height: 50%;
+        }
+    }
+
+    .content {
+        display: table;
+        width: 100%;
+        height: $card-height;
+        padding: 85px 0px;
+        box-sizing: border-box;
+        text-align: center;
+
+        div {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        svg {
+            margin: 3px;
+
+            &:nth-child(6),
+            &:nth-child(7),
+            &:nth-child(8),
+            &:nth-child(9),
+            &:nth-child(10) {
+                transform: rotate(180deg);
+            }
+        }
+
+        &.ace {
+            svg {
+                transform: scale(2);
+            }
+        }
+
+        &.two,
+        &.three {
+            svg {
+                &:nth-child(2) {
+                    transform: rotate(180deg);
+                }
+            }
+        }
+
+        &.four {
+            svg {
+                &:nth-child(3),
+                &:nth-child(4) {
+                    transform: rotate(180deg);
+                }
+            }
+        }
+
+        &.five,
+        &.six {
+            padding: 0 70px;
+
+            svg {
+                &:nth-child(4),
+                &:nth-child(5) {
+                    transform: rotate(180deg);
+                }
+            }
+        }
+
+        &.seven,
+        &.eight {
+            padding: 0 20px;
+
+            svg {
+                &:nth-child(5) {
+                    transform: rotate(180deg);
+                }
+            }
+        }
+
+        &.jack,
+        &.queen,
+        &.king {
+            padding: 0 50px;
+
+            svg {
+                margin: 0;
+
+                &:nth-child(3) {
+                    transform: rotate(180deg);
+                }
+            }
+
+            span {
+                display: block;
+                width: 100%;
+                margin: 0 0 3px;
+                text-align: center;
+
+                &:before,
+                &:after {
+                    content: '';
+                    display: inline-block;
+                    width: 7px;
+                    height: 7px;
+                    border-radius: 100%;
+                    margin: 0 3px;
+                }
+
+                &.red {
+                    &:before,
+                    &:after {
+                        background: #ea474c;
+                    }
+                }
+
+                &.black {
+                    &:before,
+                    &:after {
+                        background: #35424a;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* Back */
+.st0 {
+    fill: #FAFAFA;
+}
+
+.st1 {
+    fill: none;
+    stroke: #E0E0E0;
+    stroke-width: 0.5;
+    stroke-miterlimit: 10;
+}
+
+.st2 {
+    fill: #363636;
+}
+
+.st3 {
+    fill: #D64C4C;
+}
+
+.st4 {
+    fill: none;
+}
+
+#BackSvg {
+    position: relative;
+    z-index: 100;
+    width: 90%;
+}
+
+/* Animation Level: 1 */
+.card {
+    position: relative;
+    animation: card 1s ease;
+
+    .panel {
+        animation: slideInTop 3s ease;
+
+        &:last-child {
+            animation: slideInBottom 3s ease;
+        }
+
+        .rank {
+            animation: fadeInBottom 4s ease;
+        }
+
+        .suit {
+            animation: fadeInRight 4s ease;
+        }
+
+        .icon {
+            animation: scaleIn 3s ease;
+        }
+    }
+
+    .content {
+        .backFace svg {
+            animation: spinIn 3s ease;
+        }
+
+        .frontFace {
+            animation: spinIn 3s ease;
+        }
+    }
+
+    .ripple {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        background: darken($white, 3%);
+        width: 30px;
+        height: 30px;
+        border-radius: 100%;
+        margin: -15px 0 0 -15px;
+        animation: ripple 1.5s ease;
+        opacity: 0;
+        animation-delay: 1s;
+
+        &:nth-child(2) {
+            background: $white;
+            animation-delay: 1.3s;
+        }
+    }
+}
+
+/* Keyframes */
+@keyframes card {
+    0% {
+        transform: translateY(200%) rotate(90deg);
+    }
+}
+
+
+@keyframes ripple {
+    0% {
+        display: block;
+        transform: scale(0);
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(50);
+        opacity: 0;
+    }
+}
+
+
+@keyframes spinIn {
+    0% {
+        opacity: 0;
+        transform: rotate(90deg);
+    }
+
+    66% {
+        opacity: 0;
+        transform: rotate(90deg);
+    }
+
+    90% {
+        transform: rotate(0deg);
+    }
+}
+
+
+@keyframes scaleIn {
+    0% {
+        transform: scale(0);
+    }
+
+    75% {
+        transform: scale(0);
+    }
+}
+
+
+@keyframes slideInTop {
+    0% {
+        top: -200px;
+        opacity: 0;
+    }
+
+    66% {
+        top: -200px;
+        opacity: 0;
+    }
+
+    100% {
+        top: 0;
+    }
+}
+
+
+@keyframes slideInBottom {
+    0% {
+        bottom: -200px;
+        opacity: 0;
+    }
+
+    66% {
+        bottom: -200px;
+        opacity: 0;
+    }
+
+    100% {
+        bottom: 0;
+    }
+}
+
+
+@keyframes fadeInBottom {
+    0% {
+        transform: translateY(120%);
+        opacity: 0;
+    }
+
+    60% {
+        transform: translateY(30%);
+        opacity: 0;
+    }
+}
+
+
+@keyframes fadeInRight {
+    0% {
+        transform: translateX(120%);
+        opacity: 0;
+    }
+
+    60% {
+        transform: translateX(30%);
+        opacity: 0;
+    }
+}
+
+@keyframes buttonFadeInUp {
+    0% {
+        bottom: 30px;
+        opacity: 0;
+    }
+}
