@@ -12,68 +12,40 @@ namespace BlackJack.MVC.Controllers
     public class BlackJackGameController : Controller
     {
         private readonly IBlackJackGameService _blackJackGameService;
+        private GameState _gameState;
 
         public BlackJackGameController(IBlackJackGameService blackJackGameService)
         {
             _blackJackGameService = blackJackGameService;
         }
 
-        public IActionResult Game(string button = "Deal")
+        public IActionResult Game(string button = "New Game")
         {
             switch (button)
             {
+                case "New Game":
+                    _gameState = _blackJackGameService.NewGame();
+                    break;
                 case "Deal":
-                    _blackJackGameService.Deal(10);
-                    return View(GetGameState());
+                    _gameState = _blackJackGameService.Deal(10);
+                    break;
                 case "Hit":
-                    _blackJackGameService.Hit();
-                    return View(GetGameState());
+                    _gameState = _blackJackGameService.Hit();
+                    break;
                 case "Stand":
-                    _blackJackGameService.Stand();
-                    return View(GetGameState());
-                case "Fold":
-                    _blackJackGameService.EndGame();
-                    return View(GetGameState());
+                    _gameState = _blackJackGameService.Stand();
+                    break;
                 default:
-                    return View();
+                    _gameState = null;
+                    break;
             }
 
-            //Enum.TryParse<GameAction>(gameAction, out GameAction action);
+            if (_gameState == null) 
+            {
+                return View(_blackJackGameService.NewGame());
+            }
 
-                //switch (action)
-                //{
-                //    case GameAction.Deal:
-                //        _blackJackGameService.Deal(10);
-                //        break;
-
-                //    case GameAction.Hit:
-                //        _blackJackGameService.Hit();
-                //        break;
-
-                //    case GameAction.Stand:
-                //        _blackJackGameService.Stand();
-                //        break;
-
-                //    case GameAction.Fold:
-                //        _blackJackGameService.EndGame();
-                //        break;  
-                //}
-
-                //if (GetGameState() != null)
-                //{
-                //    return View(GetGameState());
-                //}
-                //else
-                //{
-                //    return View(new ErrorViewModel());
-                //}
-
-           
-        }
-
-        private GameState GetGameState()
-        {
-            return _blackJackGameService.GameState;
+            return View(_gameState);
         }
     }
 }

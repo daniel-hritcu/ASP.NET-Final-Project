@@ -67,6 +67,111 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+.title {
+    padding: 50px 0;
+    text-align: center;
+    letter-spacing: 2px;
+
+    h1 {
+        margin: 0 0 20px;
+        font-size: 48px;
+        font-weight: 300;
+
+        span {
+            display: block;
+            margin: 0 0 10px;
+            color: $accent;
+            font-size: 18px;
+            font-weight: $semibold;
+            text-transform: uppercase;
+        }
+    }
+}
+
+#gameContainer {
+    padding-top: 85px;
+    margin: auto;
+    width: 1440px;
+}
+
+.handContainer {
+    text-align: center;
+    margin: auto;
+    min-height: 340px;
+    overflow: hidden;
+}
+
+.hand {
+    width: auto;
+    margin: auto;
+}
+
+.tip {
+    margin-top: 8px;
+    border-radius: 3px;
+    line-height: 1.7em;
+    text-align: center;
+    display: block;
+
+    h1 {
+        margin-right: 10px;
+        color: $dark-gray;
+        font-size: 24px;
+        font-weight: 300;
+    }
+}
+
+.tip.left {
+    float: left;
+}
+
+.tip.right {
+    float: right;
+}
+
+.tip.red {
+    h1 {
+        color: $accent;
+    }
+}
+
+.tip.center {
+    margin: auto;
+    text-align: center;
+}
+
+#betInput {
+    display: inline-block;
+    @include materialShadow(1);
+    border-radius: 3px;
+    padding: 10px 20px;
+    transition: 0.3s ease;
+    margin-top: 10px;
+}
+
+#Controls {
+    display: block;
+    height: 48px;
+    width: auto;
+    text-align: center;
+
+    .btn {
+        cursor: pointer;
+        display: inline-block;
+        background: $accent;
+        @include materialShadow(1);
+        border-radius: 3px;
+        padding: 10px 20px;
+        color: $white;
+        text-decoration: none;
+        transition: 0.3s ease;
+        margin-right: 10px;
+
+        &:hover {
+            @include materialShadow(2);
+        }
+    }
+}
 /* Card */
 .card {
     margin: 10px;
@@ -259,7 +364,6 @@ body {
         }
     }
 }
-
 /* Back */
 .st0 {
     fill: #FAFAFA;
@@ -289,7 +393,6 @@ body {
     z-index: 100;
     width: 90%;
 }
-
 /* Animation Level: 1 */
 .card {
     position: relative;
@@ -344,7 +447,6 @@ body {
         }
     }
 }
-
 /* Keyframes */
 @keyframes card {
     0% {

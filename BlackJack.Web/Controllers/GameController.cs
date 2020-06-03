@@ -24,7 +24,7 @@ namespace BlackJack.Web.Controllers
         {
             switch (action)
             {
-                case "Bet":
+                case "Deal":
                     if (bet != 0)
                         return _blackJackGameService.Deal(bet);
                     break;
@@ -37,8 +37,7 @@ namespace BlackJack.Web.Controllers
 
                 case "NewGame":
                 default:
-                    _blackJackGameService.NewGame();
-                    return _blackJackGameService.Deal(10);
+                    return _blackJackGameService.NewGame();
             }
 
             return _blackJackGameService.NewGame();

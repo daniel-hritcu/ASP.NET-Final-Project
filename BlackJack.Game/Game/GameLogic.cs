@@ -7,13 +7,14 @@ using System.Linq;
 
 namespace BlackJack.Game.Game
 {
-    internal class GameLogic
-    {
-        private DeckService _deckService;
-        private Player _defaultPlayer;
-        private Player _dealer;
-        private GameState _gameState;
+	internal class GameLogic
+	{
+		private DeckService _deckService;
+		private Player _defaultPlayer;
+		private Player _dealer;
+		private GameState _gameState;
 		private Card _hiddenCard;
+		private double _bet {get; set;}
 
 		public GameLogic()
         {
@@ -92,9 +93,7 @@ namespace BlackJack.Game.Game
 
             return _gameState;
         }
-
-            
-
+  
         public GameState Stand()
         {
             //throw Exception if Hit() is called when game state is not open.
@@ -124,7 +123,10 @@ namespace BlackJack.Game.Game
 			{
 				//Set new player balance
 				_defaultPlayer.Balance = newPlayerBalance;
+				//Store bet to calculate winnings
 			}
+
+			_bet = bet;
 		}
 
 		internal void DealFirstHands()
@@ -205,18 +207,15 @@ namespace BlackJack.Game.Game
 			switch (_gameState.CurrentState)
 			{
 				case State.Win:
-					_gameState.Winnings = _gameState.Bet * Rules.WIN_MULTIPLYER;
+					_gameState.DefaultPlayer.Balance += _bet * Rules.WIN_MULTIPLYER;
 					break;
 				case State.BlackJack:
-					_gameState.Winnings = _gameState.Bet * Rules.BLACKJACK_MULTIPLIER;
+					_gameState.DefaultPlayer.Balance += _bet * Rules.BLACKJACK_MULTIPLIER;
 					break;
 				case State.Push:
-					_gameState.Winnings = _gameState.Bet;
+					_gameState.DefaultPlayer.Balance += _bet;
 					break;
 			}
-
-			//Add win ammount if any
-			_gameState.DefaultPlayer.Balance += _gameState.Winnings;
 		}
 
 		private void CalculateScore(Player player)

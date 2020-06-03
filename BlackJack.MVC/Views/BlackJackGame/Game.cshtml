@@ -19,7 +19,7 @@
                 <td>
                     @card.ToString()
                     <br />
-                    <img src="@Url.Content("~/images/cards/" + card.ToString() + ".svg")" alt="@card.ToString()" />
+                    <img style="width: 50%;" src="@Url.Content("~/images/cards/" + card.ToString() + ".svg")" alt="@card.ToString()" />
                 </td>
 
             }
@@ -44,7 +44,7 @@
                 <td>
                     @card.ToString()
                     <br />
-                    <img src="@Url.Content("~/images/cards/" + card.ToString() + ".svg")" alt="@card.ToString()" />
+                    <img style="width: 50%;" src="@Url.Content("~/images/cards/" + card.ToString() + ".svg")" alt="@card.ToString()" />
                 </td>
             }
         </tr>
@@ -62,6 +62,10 @@
         </thead>
         <tbody>
             <tr>
+                <td width="5%">
+                    <input type="submit" name="button" class="button1" value="Deal" />
+                </td>
+
                 <td width="5%">
                     <input type="submit" name="button" class="button1" value="Hit" />
                 </td>
