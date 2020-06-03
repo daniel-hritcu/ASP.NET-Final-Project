@@ -100,6 +100,10 @@ export class GameState extends Component {
             return <p><em>Loading...</em></p>;
         }
 
+        if (this.state.bet > this.state.gameState.defaultPlayer.balance) {
+            this.setBet(this.state.gameState.defaultPlayer.balance);
+        }
+
         if (this.state.clearCards) {
             this.setClearCards(false);
             return (
@@ -200,7 +204,7 @@ export class GameState extends Component {
         } else if (this.state.gameState.stateName !== "NewGame") {
             return (
                 <span>
-                    <button className="btn" {this.state.bet == 0 ? ( disabled ) : ("")} onClick={this.betDown}>-5$</button>
+                    <button className="btn" onClick={this.betDown}>-5$</button>
                     <button className="btn" onClick={this.bet}>Bet <strong>{this.state.bet + "$"}</strong></button>
                     <button className="btn" onClick={this.betUp}>+5$</button>
                     <div className="tip right red"><h1><span>Conclusion: </span>{this.state.gameState.stateName}</h1></div>

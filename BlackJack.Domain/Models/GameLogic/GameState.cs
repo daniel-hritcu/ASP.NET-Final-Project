@@ -12,8 +12,6 @@ namespace BlackJack.Domain.GameLogic
         public Player Dealer { get; set; }
         public State CurrentState { get; set; }
         public string StateName { get => CurrentState.ToString(); }
-        public double Bet { get; set; }
-        public double Winnings { get; set; }
 
         public GameState(Player defaultPlayer, Player dealer, State currentState = State.NewGame)
         {
